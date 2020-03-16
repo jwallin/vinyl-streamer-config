@@ -5,7 +5,7 @@ After=sound.target
 [Service]
 Type=forking
 KillMode=none
-User=forkedDAAPDusr
+User=pi
 ExecStart=${CPIPED_PATH}/cpiped -d "hw:${INPUT_DEVICE}" -s ${PWD}/soundDetect.sh -D ${OUTPUT_PIPE}
 ExecStop=/usr/bin/killall -9 cpiped
 WorkingDirectory=${PWD}
