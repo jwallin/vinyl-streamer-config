@@ -29,14 +29,16 @@ service forked-daapd restart
 curl -X PUT "http://localhost:3689/api/update"
 
 # Build cpiped
-rmdir cpiped
+rmdir -f cpiped
 git clone https://github.com/b-fitzpatrick/cpiped.git
 cd cpiped
 make
 mv cpiped $CPIPED_PATH
 
+cd ..
+
 # Create fifo pipe
-rm $OUTPUT_PIPE
+rm -f $OUTPUT_PIPE
 mkfifo $OUTPUT_PIPE
 
 # Install cpiped as a service
