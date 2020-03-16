@@ -11,7 +11,6 @@ eval "cat <<EOF
 $(<cpiped.service.template)
 EOF
 " 2> /dev/null > g.txt
-exit
 
 # Install dependencies
 apt-get install forked-daapd libasound2-dev -y
