@@ -7,11 +7,6 @@ OUTPUT_PIPE="/var/media/vinylOutputPipe"
 CPIPED_PATH="/usr/local/bin"
 FORKED_DAAPD_CONFIG_PATH="/etc/forked-daapd.conf"
 
-eval "cat <<EOF
-$(<cpiped.service.template)
-EOF
-" 2> /dev/null > g.txt
-
 # Install dependencies
 apt-get install forked-daapd libasound2-dev -y
 
