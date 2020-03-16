@@ -12,6 +12,7 @@ INPUT_DEVICE="CARD=CODEC,DEV=0"
 OUTPUT_PIPE="${LIBRARY_DIR}/vinylOutputPipe"
 CPIPED_PATH="/usr/local/bin"
 FORKED_DAAPD_CONFIG_PATH="/etc/forked-daapd.conf"
+User=${SERVICE_USER}="pi"
 
 # Create library dir if it doesn't exist
 mkdir -p $LIBRARY_DIR
@@ -34,9 +35,6 @@ sed -i "s/\(filescan_disable = \)[^\"]*/\1true/g" $FORKED_DAAPD_CONFIG_PATH
 # Restart service
 service forked-daapd restart
 
-# Trigger filescan
-curl -X PUT "http://localhost:3689/api/update"
-
 # Build cpiped
 rm -rf cpiped
 git clone https://github.com/b-fitzpatrick/cpiped.git
@@ -49,6 +47,7 @@ cd ..
 # Create fifo pipe
 rm -f $OUTPUT_PIPE
 mkfifo $OUTPUT_PIPE
+chown $SERVICE_USER $OUTPUT_PIPE
 
 # Install cpiped as a service
 eval "cat <<EOF
@@ -56,5 +55,10 @@ $(<cpiped.service.template)
 EOF
 " 2> /dev/null > /etc/systemd/system/cpiped.service
 
+
+# Trigger filescan
+curl -X PUT "http://localhost:3689/api/update"
+
 # Start cpiped service
+systemctl daemon-reload
 systemctl start cpiped.service
