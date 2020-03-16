@@ -14,7 +14,7 @@ CPIPED_PATH="/usr/local/bin"
 FORKED_DAAPD_CONFIG_PATH="/etc/forked-daapd.conf"
 
 # Install dependencies
-apt-get install forked-daapd libasound2-dev -y
+apt-get install forked-daapd libasound2-dev libavahi-client-dev -y
 
 # Update config file
 sed -i '/sample_rate/s/^#//g' $FORKED_DAAPD_CONFIG_PATH #uncomment
