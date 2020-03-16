@@ -1,4 +1,4 @@
-Unit]
+[Unit]
 Description=cpiped
 After=sound.target
 
