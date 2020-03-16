@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Ensure root
+if [[ $EUID -ne 0 ]]; then
+   echo "This script must be run as root" 
+   exit 1
+fi
+
 # Configuration
 LIBRARY_DIR="/var/media"
 INPUT_DEVICE="CARD=CODEC,DEV=0"
