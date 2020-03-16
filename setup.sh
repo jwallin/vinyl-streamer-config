@@ -9,9 +9,12 @@ fi
 # Configuration
 LIBRARY_DIR="/var/media"
 INPUT_DEVICE="CARD=CODEC,DEV=0"
-OUTPUT_PIPE="/var/media/vinylOutputPipe"
+OUTPUT_PIPE="${LIBRARY_DIR}/vinylOutputPipe"
 CPIPED_PATH="/usr/local/bin"
 FORKED_DAAPD_CONFIG_PATH="/etc/forked-daapd.conf"
+
+# Create library dir if it doesn't exist
+mkdir -p $LIBRARY_DIR
 
 # Install dependencies
 apt-get install forked-daapd libasound2-dev libavahi-client-dev -y
