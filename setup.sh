@@ -25,7 +25,7 @@ apt update
 mkdir -p $LIBRARY_DIR
 
 # Install dependencies
-apt-get install ibasound2-dev libavahi-client-dev -y
+apt-get install libasound2-dev libavahi-client-dev -y
 
 # Install forked-daapd 
 apt install forked-daapd -y
