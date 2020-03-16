@@ -12,7 +12,7 @@ INPUT_DEVICE="CARD=CODEC,DEV=0"
 OUTPUT_PIPE="${LIBRARY_DIR}/vinylOutputPipe"
 CPIPED_PATH="/usr/local/bin"
 FORKED_DAAPD_CONFIG_PATH="/etc/forked-daapd.conf"
-User=${SERVICE_USER}="pi"
+SERVICE_USER="pi"
 
 # Create library dir if it doesn't exist
 mkdir -p $LIBRARY_DIR
@@ -42,6 +42,7 @@ cd cpiped
 make
 mv cpiped $CPIPED_PATH
 
+# Take a step back
 cd ..
 
 # Create fifo pipe
