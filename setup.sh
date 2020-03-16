@@ -29,7 +29,7 @@ service forked-daapd restart
 curl -X PUT "http://localhost:3689/api/update"
 
 # Build cpiped
-rmdir -f cpiped
+rm -rf cpiped
 git clone https://github.com/b-fitzpatrick/cpiped.git
 cd cpiped
 make
