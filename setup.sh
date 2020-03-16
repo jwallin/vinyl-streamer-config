@@ -43,7 +43,7 @@ sed -i "s/\(directories = { \"\)[^\"]*/\1${LIBRARY_DIR//\//\\/}/g" $FORKED_DAAPD
 # sed -i "s/\(filescan_disable = \)[^\"]*/\1true/g" $FORKED_DAAPD_CONFIG_PATH
 
 # Restart service
-service forked-daapd restart
+systemctl start forked-daapd
 
 # Build cpiped
 rm -rf cpiped
@@ -72,4 +72,8 @@ curl -X PUT "http://localhost:3689/api/update"
 
 # Start cpiped service
 systemctl daemon-reload
+
+systemctl enable cpiped.service
+systemctl enable forked-daapd.service
+
 systemctl start cpiped.service
