@@ -14,11 +14,21 @@ CPIPED_PATH="/usr/local/bin"
 FORKED_DAAPD_CONFIG_PATH="/etc/forked-daapd.conf"
 SERVICE_USER="pi"
 
+# Add Repo
+wget -q -O - http://www.gyfgafguf.dk/raspbian/forked-daapd.gpg | apt-key add -
+
+# Add source 
+echo "deb http://www.gyfgafguf.dk/raspbian/forked-daapd/ buster contrib" >> /etc/apt/sources.list
+apt update
+
 # Create library dir if it doesn't exist
 mkdir -p $LIBRARY_DIR
 
 # Install dependencies
-apt-get install forked-daapd libasound2-dev libavahi-client-dev -y
+apt-get install ibasound2-dev libavahi-client-dev -y
+
+# Install forked-daapd 
+apt install forked-daapd -y
 
 # Update config file
 sed -i '/sample_rate/s/^#//g' $FORKED_DAAPD_CONFIG_PATH #uncomment
@@ -29,8 +39,8 @@ sed -i '/pipe_autostart/s/^#//g' $FORKED_DAAPD_CONFIG_PATH #uncomment
 sed -i "s/\(directories = { \"\)[^\"]*/\1${LIBRARY_DIR//\//\\/}/g" $FORKED_DAAPD_CONFIG_PATH
 
 # Disable automatic filescan
-sed -i '/filescan_disable/s/^#//g' $FORKED_DAAPD_CONFIG_PATH #uncomment
-sed -i "s/\(filescan_disable = \)[^\"]*/\1true/g" $FORKED_DAAPD_CONFIG_PATH
+# sed -i '/filescan_disable/s/^#//g' $FORKED_DAAPD_CONFIG_PATH #uncomment
+# sed -i "s/\(filescan_disable = \)[^\"]*/\1true/g" $FORKED_DAAPD_CONFIG_PATH
 
 # Restart service
 service forked-daapd restart
