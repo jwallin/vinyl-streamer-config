@@ -36,7 +36,7 @@ curl -X PUT "http://localhost:3689/api/update"
 
 # Build cpiped
 rmdir cpiped
-git clone git@github.com:b-fitzpatrick/cpiped.git
+git clone https://github.com/b-fitzpatrick/cpiped.git
 cd cpiped
 make
 mv cpiped $CPIPED_PATH
